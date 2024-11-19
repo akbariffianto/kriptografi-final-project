@@ -61,7 +61,7 @@ $row = mysqli_fetch_array($result);
             unset($_SESSION['notification']);
         endif;
         ?>
-        <form action="deskripkode.php" method="post" enctype="multipart/form-data" class="mt-5 px-5">
+        <form action="deskripfoto.php" method="post" enctype="multipart/form-data" class="mt-5 px-5">
             <a href="redeemtoken.php?id=<?= $row['classid'] ?>" class="fw-bold">
                 <h3 class="fw-bold">Kembali</h3>
             </a>
@@ -80,46 +80,6 @@ $row = mysqli_fetch_array($result);
                     <input type="file" class="form-control" name="foto_enkrip" required accept="image/*">
                 </div>
                 <button type="submit" class="btn btn-primary fw-bold">Deskripsi Foto</button>
-            </div>
-
-            <div class="mb-3 row">
-                <input type="textarea" class="form-control" name="kode_redeem">
-            </div>
-
-            <div class="mb-3 row">
-                <h6>Kunci Caesar Cipher</h6>
-                <label for="shiftkunci" class="col-sm-3 col-form-label fw-bold">Shift Caesar:</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" name="shiftkunci" placeholder="Inputkan Shift Caesar" required>
-                </div>
-            </div>
-
-            <div class="mb-3 row">
-                <h6>Hasil Deskripsi</h6>
-                <label for="shiftkunci" class="col-sm-3 col-form-label fw-bold">Shift Caesar:</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" name="shiftkunci" placeholder="Inputkan Shift Caesar" required>
-                </div>
-            </div>
-
-            <div class="mb-3 row">
-                <h6>Kunci AES</h6>
-                <label for="key_input" class="col-sm-3 col-form-label fw-bold">Kunci Key:</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" name="key_input" placeholder="Inputkan Kunci Key" required>
-                </div>
-                <label for="iv_input" class="col-sm-3 col-form-label fw-bold">IV Input:</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" name="iv_input" placeholder="Inputkan IV input" required>
-                </div>
-            </div>
-
-            <div class="mb-3 row">
-            <h6>Kode Redeem</h6>
-                <label for="Kode" class="col-sm-3 col-form-label fw-bold">Kode:</label>
-                <div class="col-sm-9">
-                    <input type="text" class="form-control" name="kode" placeholder="Inputkan Kode" required>
-                </div>
             </div>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">

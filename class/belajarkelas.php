@@ -22,8 +22,9 @@ $queryClass = "SELECT * FROM class WHERE classid='$classid'";
 $resultClass = mysqli_query($konek, $queryClass);
 $classData = mysqli_fetch_assoc($resultClass);
 
-$queryClassAccess = "SELECT ca.id_code_class, fe.id, ca.classid, ca.code_access FROM classes_access ca INNER JOIN fotoenkrip fe ON ca.id_code_class = fe.id_code_classes INNER JOIN class c ON ca.classid = c.classid WHERE ca.classid='$classid' AND ca.uid=$uid";
-$resultClassAccess = mysqli_query($konek, $queryClassAccess);
+$queryNotes = "SELECT n.noteid, n.classid, u.nama_lengkap FROM notes n INNER JOIN class c ON n.classid = c.classid INNER JOIN users u ON n.uid = u.uid WHERE n.classid='$classid'";
+$resultNotes = mysqli_query($konek, $queryNotes);
+$notesData = mysqli_fetch_assoc($resultNotes);
 
 if (isset($_SESSION['notification'])) {
     echo "<script>alert('" . $_SESSION['notification'] . "');</script>";
@@ -51,32 +52,22 @@ if (isset($_SESSION['notification'])) {
         <h2 class="fw-bold"><?= $classData['nama_class'] ?>!</h2>
         <h4><?= $classData['deskripsi'] ?></h4>
         <div class="row mt-3 gx-5 gy-5">
-            <h5>Kode akses yang tersedia:</h5>
-            <?php
-            if (mysqli_num_rows($resultClassAccess) > 0) {
-                foreach ($resultClassAccess as $row) {
-            ?>
+            <h5>Catatan kelas yang tersedia:</h5>
                     <div class="col-sm-6 mb-3 mb-sm-0">
                         <div class="card">
                             <div class="card-body">
-                                <h5 class="card-title">Terdapat kode redeem</h5>
-                                <?php if (is_null($row['code_access'])) { ?>
-                                    <p class="text-warning">Pesanan Anda masih dalam proses.</p>
+                                <h5 class="card-title">Terdapat catatan:</h5>
+                                <?php if (is_null($notesData['noteid'])) { ?>
+                                    <p class="text-warning">Catatan belum ada.</p>
                                 <?php } else { ?>
-                                    <a href="tukarkode.php?id=<?= $row['id'] ?>" class="btn btn-primary">Segera Tukar</a>
+                                    <a href="lihatcatatan.php?id=<?= $classid ?>" class="btn btn-primary">Lihat Catatan</a>
                                 <?php } ?>
                             </div>
                         </div>
                     </div>
-            <?php
-                }
-            } else {
-                echo "<p class='text-center'>Tidak ada data</p>";
-            }
-            ?>
 
         </div>
-        <a href="../inputfoto/inputfoto.php?id=<?= $classData['classid'] ?>"><button type="button" class="btn btn-primary mt-5">Pesan Course</button></a>
+        <a href="note.php?id=<?= $classData['classid'] ?>"><button type="button" class="btn btn-primary mt-5">Tambahkan Catatan</button></a>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

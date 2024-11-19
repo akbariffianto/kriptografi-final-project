@@ -19,7 +19,7 @@ if (!$validEmail) {
     exit();
 }
 
-$query_email = "SELECT * FROM users WHERE email='$email'";
+$query_email = "SELECT * FROM users WHERE email_user='$email'";
 $result_email = mysqli_query($konek, $query_email);
 
 if (mysqli_num_rows($result_email) > 0) {
@@ -27,7 +27,7 @@ if (mysqli_num_rows($result_email) > 0) {
     exit();
 }
 
-$query = "INSERT INTO users (nama_lengkap, email, password) VALUES ('$name', '$email', '$password')";
+$query = "INSERT INTO users (nama_lengkap, email_user, password) VALUES ('$name', '$email', '$password')";
 $result = mysqli_query($konek, $query);
 
 if ($result) {

@@ -122,7 +122,7 @@ $query = "UPDATE classes_access ca
     INNER JOIN foto f ON ca.fotoid = f.id_foto
     SET 
         f.status = '$status',
-        ca.code_access = '$kode_encrypted'
+        ca.code_access = '$kode'
     WHERE ca.id_code_class = '$id'";
 
 $queryFotoenkrip = "INSERT INTO fotoenkrip (id_code_classes, fotoenkrip) 
