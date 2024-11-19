@@ -46,25 +46,24 @@ if (isset($_SESSION['notification'])) {
         </div>
     </nav>
     <div class="container p-5 my-5 border border-5 border-success-subtle rounded-5">
-    <a href="class.php" class="fw-bold">
-                <h3 class="fw-bold">Kembali</h3>
-            </a>
+        <a href="class.php" class="fw-bold">
+            <h3 class="fw-bold">Kembali</h3>
+        </a>
         <h2 class="fw-bold"><?= $classData['nama_class'] ?>!</h2>
         <h4><?= $classData['deskripsi'] ?></h4>
         <div class="row mt-3 gx-5 gy-5">
             <h5>Catatan kelas yang tersedia:</h5>
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Terdapat catatan:</h5>
-                                <?php if (is_null($notesData['noteid'])) { ?>
-                                    <p class="text-warning">Catatan belum ada.</p>
-                                <?php } else { ?>
-                                    <a href="lihatcatatan.php?id=<?= $classid ?>" class="btn btn-primary">Lihat Catatan</a>
-                                <?php } ?>
-                            </div>
-                        </div>
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="card">
+                    <div class="card-body">
+                        <?php if (empty($notesData) || is_null($notesData['noteid'])) { ?>
+                            <p class="text-warning">Catatan belum ada.</p>
+                        <?php } else { ?>
+                            <a href="lihatcatatan.php?id=<?= $classid ?>" class="btn btn-primary">Lihat Catatan</a>
+                        <?php } ?>
                     </div>
+                </div>
+            </div>
 
         </div>
         <a href="note.php?id=<?= $classData['classid'] ?>"><button type="button" class="btn btn-primary mt-5">Tambahkan Catatan</button></a>

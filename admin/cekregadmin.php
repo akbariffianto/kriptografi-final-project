@@ -4,6 +4,7 @@ include "../koneksi.php";
 $username = $_POST['username'];
 $email = $_POST['email'];
 $password = $_POST['password'];
+$hashedPassword = hash('sha256', $password);
 
 $emailHandling = ['@gmail.com', '@yahoo.com', '@outlook.com'];
 $validEmail = false;
@@ -27,7 +28,7 @@ if (mysqli_num_rows($result_email) > 0) {
     exit();
 }
 
-$query = "INSERT INTO admin (email, password) VALUES ('$email', '$password')";
+$query = "INSERT INTO admin (email, password) VALUES ('$email', '$hashedPassword')";
 $result = mysqli_query($konek, $query);
 
 if ($result) {
@@ -36,5 +37,6 @@ if ($result) {
 } else {
     header('location:registadmin.php?pesan=gagal');
 }
+
 mysqli_close($konek);
 ?>

@@ -39,10 +39,15 @@ function caesar_encrypt($plaintext, $shift)
     $shift = $shift % 26; // Batasi pergeseran antara 0-25
     foreach (str_split($plaintext) as $char) {
         if (ctype_alpha($char)) {
+            // Proses huruf, baik kapital maupun kecil
             $offset = ctype_upper($char) ? 65 : 97;
             $result .= chr((ord($char) - $offset + $shift) % 26 + $offset);
+        } elseif (ctype_digit($char)) {
+            // Proses angka
+            $result .= chr((ord($char) - 48 + $shift) % 10 + 48); // Angka 0-9
         } else {
-            $result .= $char; // Biarkan karakter non-huruf tetap
+            // Biarkan karakter non-alfanumerik tetap seperti aslinya (misalnya simbol)
+            $result .= $char;
         }
     }
     return $result;
@@ -116,6 +121,8 @@ if (!empty($_FILES['fotoenkrip']['name'])) {
     $stego_image = embed_text_in_image($targetFile, $data_to_embed);
     file_put_contents($targetFile, $stego_image); // Simpan gambar dengan teks terenkripsi
 }
+
+// Langkah 6: Hash kode akses sebelum dimasukkan ke database
 
 // Query untuk memperbarui data di database
 $query = "UPDATE classes_access ca 

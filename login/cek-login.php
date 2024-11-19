@@ -4,13 +4,10 @@ include "../koneksi.php";
 
 $email = $_POST["email"];
 $password = $_POST["password"];
+$hashedPassword = hash('sha256', $password);
 
-// Menyiapkan query untuk memeriksa kredensial pengguna di tabel admin
-$hasil = mysqli_query($konek, "SELECT * FROM users WHERE email_user='$email' AND password='$password'");
-
-// Mengambil data dari hasil query
+$hasil = mysqli_query($konek, "SELECT * FROM users WHERE email_user='$email' AND password='$hashedPassword'");
 $data = mysqli_fetch_array($hasil);
-
 $cek = mysqli_num_rows($hasil);
 
 if ($cek > 0) {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 18, 2024 at 05:43 PM
+-- Generation Time: Nov 19, 2024 at 10:13 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -85,11 +85,12 @@ CREATE TABLE `classes_access` (
 --
 
 INSERT INTO `classes_access` (`id_code_class`, `classid`, `uid`, `fotoid`, `code_access`) VALUES
-(1, 1, 1, 5, 'ebRzgfFUyZjHl0ub9+e3NRkD8tmOmN6FYDScoe6V6Fg='),
 (2, 2, 1, 8, '91sTyRcb/q8NQfmOFOnscg=='),
 (3, 2, 1, 9, 'Cw39FL5/uCb2xsTEFU4loA=='),
 (4, 4, 1, 12, 'G+rN6rM0UMHxz+KVB/PQFQ=='),
-(5, 3, 1, 13, 'vDVy8J6HeODQh3rA6b1bGtejGlVte75tqYOi+VjuRxs=');
+(5, 3, 1, 13, 'vDVy8J6HeODQh3rA6b1bGtejGlVte75tqYOi+VjuRxs='),
+(6, 1, 1, 14, 'pemrogramanweb'),
+(7, 1, 2, 15, 'nih kodenya');
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,9 @@ INSERT INTO `foto` (`id_foto`, `uid`, `classid`, `foto`, `status`) VALUES
 (8, 1, 2, 'pamfletjalansantai.png', 'Terkonfirmasi'),
 (9, 1, 2, 'pamfletjalansantai.png', 'Terkonfirmasi'),
 (12, 1, 4, 'WhatsApp Image 2024-11-12 at 4.57.50 PM.jpeg', 'Terkonfirmasi'),
-(13, 1, 3, 'Page Managemen Event.png', 'Terkonfirmasi');
+(13, 1, 3, 'Page Managemen Event.png', 'Terkonfirmasi'),
+(14, 1, 1, 'Qubes_OS_Logo.svg.png', 'Terkonfirmasi'),
+(15, 2, 1, 'Screenshot 2024-11-19 084726.png', 'Terkonfirmasi');
 
 -- --------------------------------------------------------
 
@@ -133,7 +136,8 @@ CREATE TABLE `fotoenkrip` (
 --
 
 INSERT INTO `fotoenkrip` (`id`, `id_code_classes`, `fotoenkrip`) VALUES
-(4, 1, 'Page Managemen Event (1).png');
+(6, 6, 'Qubes_OS_Logo.svg.png'),
+(7, 7, 'Screenshot 2024-11-19 084726.png');
 
 -- --------------------------------------------------------
 
@@ -143,23 +147,20 @@ INSERT INTO `fotoenkrip` (`id`, `id_code_classes`, `fotoenkrip`) VALUES
 
 CREATE TABLE `notes` (
   `noteid` int(11) NOT NULL,
-  `class_id` int(11) NOT NULL,
+  `classid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
   `file` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `note_access`
+-- Dumping data for table `notes`
 --
 
-CREATE TABLE `note_access` (
-  `code_note` varchar(65) NOT NULL,
-  `classid` int(11) NOT NULL,
-  `noteid` int(11) NOT NULL,
-  `uid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+INSERT INTO `notes` (`noteid`, `classid`, `uid`, `file`) VALUES
+(2, 1, 2, 'enc_123220004_Akbar Ariffianto_Tugas 1 PBO.pdf'),
+(3, 1, 2, '../note/enc_Kriptografi berasal dari bahasa.pdf'),
+(4, 1, 2, 'encrypted_1732001048_Kriptografi berasal dari bahasa.pdf'),
+(5, 1, 2, 'encrypted_1732001242_Kriptografi berasal dari bahasa.pdf');
 
 -- --------------------------------------------------------
 
@@ -179,7 +180,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`uid`, `email_user`, `password`, `nama_lengkap`) VALUES
-(1, 'ariffianto980@gmail.com', '123', 'Akbar Ariffianto');
+(1, 'ariffianto980@gmail.com', '123', 'Akbar Ariffianto'),
+(2, 'akbar@gmail.com', '321', 'akbar2');
 
 --
 -- Indexes for dumped tables
@@ -229,16 +231,7 @@ ALTER TABLE `fotoenkrip`
 ALTER TABLE `notes`
   ADD PRIMARY KEY (`noteid`),
   ADD KEY `user2` (`uid`),
-  ADD KEY `course2` (`class_id`);
-
---
--- Indexes for table `note_access`
---
-ALTER TABLE `note_access`
-  ADD PRIMARY KEY (`code_note`),
-  ADD KEY `class` (`classid`),
-  ADD KEY `note` (`noteid`),
-  ADD KEY `userr` (`uid`);
+  ADD KEY `classnote` (`classid`);
 
 --
 -- Indexes for table `users`
@@ -267,31 +260,31 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `classes_access`
 --
 ALTER TABLE `classes_access`
-  MODIFY `id_code_class` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_code_class` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `foto`
 --
 ALTER TABLE `foto`
-  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_foto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `fotoenkrip`
 --
 ALTER TABLE `fotoenkrip`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
-  MODIFY `noteid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `noteid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -322,16 +315,9 @@ ALTER TABLE `fotoenkrip`
 -- Constraints for table `notes`
 --
 ALTER TABLE `notes`
-  ADD CONSTRAINT `course2` FOREIGN KEY (`class_id`) REFERENCES `class` (`classid`),
+  ADD CONSTRAINT `classnote` FOREIGN KEY (`classid`) REFERENCES `class` (`classid`),
+  ADD CONSTRAINT `course2` FOREIGN KEY (`classid`) REFERENCES `class` (`classid`),
   ADD CONSTRAINT `user2` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
-
---
--- Constraints for table `note_access`
---
-ALTER TABLE `note_access`
-  ADD CONSTRAINT `class` FOREIGN KEY (`classid`) REFERENCES `class` (`classid`),
-  ADD CONSTRAINT `note` FOREIGN KEY (`noteid`) REFERENCES `notes` (`noteid`),
-  ADD CONSTRAINT `userr` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

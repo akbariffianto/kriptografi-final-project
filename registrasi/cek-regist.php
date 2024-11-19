@@ -4,6 +4,7 @@ include "../koneksi.php";
 $name = $_POST['name'];
 $email = $_POST['email'];
 $password = $_POST['password'];
+$hashedPassword = hash('sha256', $password);
 
 $emailHandling = ['@gmail.com', '@yahoo.com', '@outlook.com'];
 $validEmail = false;
@@ -27,7 +28,7 @@ if (mysqli_num_rows($result_email) > 0) {
     exit();
 }
 
-$query = "INSERT INTO users (nama_lengkap, email_user, password) VALUES ('$name', '$email', '$password')";
+$query = "INSERT INTO users (nama_lengkap, email_user, password) VALUES ('$name', '$email', '$hashedPassword')";
 $result = mysqli_query($konek, $query);
 
 if ($result) {

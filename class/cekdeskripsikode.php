@@ -17,7 +17,8 @@ $key_input = $_POST['key_input']; // Kunci AES
 $iv_input = $_POST['iv_input']; // IV AES
 
 // Fungsi Caesar Cipher untuk dekripsi
-function caesar_decrypt($ciphertext, $shift) {
+function caesar_decrypt($ciphertext, $shift)
+{
     $result = "";
     $shift = $shift % 26; // Batasi pergeseran antara 0-25
     foreach (str_split($ciphertext) as $char) {
@@ -32,7 +33,8 @@ function caesar_decrypt($ciphertext, $shift) {
 }
 
 // Fungsi AES untuk dekripsi
-function aes_decrypt_custom($ciphertext, $key_input, $iv_input) {
+function aes_decrypt_custom($ciphertext, $key_input, $iv_input)
+{
     $key = hash('sha256', $key_input, true);
     $iv = substr(hash('sha256', $iv_input), 0, 16);
     return openssl_decrypt($ciphertext, 'AES-256-CBC', $key, 0, $iv);
@@ -66,4 +68,3 @@ if ($result && mysqli_num_rows($result) > 0) {
 }
 
 mysqli_close($konek);
-?>
